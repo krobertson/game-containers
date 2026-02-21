@@ -21,6 +21,7 @@ RUN   apt-get update; \
           libsdl2-2.0-0 libsdl1.2debian libfontconfig1 libicu76 libc6 \
           libatomic1 liblua5.3-0 libgdiplus gdb libc++1 libc++abi1 libunwind8 \
           libgcc-s1; \
+      \
       apt-get clean; \
       rm -rf /var/lib/apt/lists/*;
 
