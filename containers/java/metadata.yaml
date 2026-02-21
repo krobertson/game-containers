@@ -1,0 +1,16 @@
+---
+name: java
+version: 8
+file: Dockerfile.java8
+---
+name: java
+version: 17
+file: Dockerfile.java17
+---
+name: java
+version: 21
+file: Dockerfile.java21
+---
+name: java
+version: 25
+file: Dockerfile.java25
