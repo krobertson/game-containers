@@ -27,7 +27,7 @@ RUN   sed -i -e 's/ main / main contrib non-free /' -e 's/ main$/ main contrib n
 ADD   --chmod=0755 ./setupwine.sh /usr/local/bin
 
 ENV   XDG_RUNTIME_DIR="/tmp" \
-      WINEPREFIX="/game/wine/.wine" \
+      WINEPREFIX="/game/.local/.wine" \
       WINEARCH="win64" \
       WINEDEBUG="-all"
 

@@ -7,7 +7,7 @@ mkdir -p $WINEPREFIX
 wineboot --init --update
 
 # If no winetricks to install, just exit
-if [ ! -z ${WINETRICKS} ]; then
+if [ -z "${WINETRICKS}" ]; then
   exit 0
 fi
 
