@@ -11,7 +11,7 @@ RUN   sed -i -e 's/ main / main contrib non-free /' -e 's/ main$/ main contrib n
       \
       apt-get update; \
       apt-get install -o APT::Keep-Downloaded-Packages="false" -y --no-install-recommends \
-          cabextract winbind xvfb xauth libxi6 wine-binfmt; \
+          cabextract winbind xvfb xauth libxi6 wine-binfmt libsdl2-2.0-0 libsdl2-2.0-0:i386; \
       \
       install -d -m 0755 /etc/apt/keyrings; \
       wget -qO- https://dl.winehq.org/wine-builds/winehq.key | gpg --dearmor -o /etc/apt/keyrings/winehq-archive.key -; \
@@ -27,7 +27,7 @@ RUN   sed -i -e 's/ main / main contrib non-free /' -e 's/ main$/ main contrib n
 ADD   --chmod=0755 ./setupwine.sh /usr/local/bin
 
 ENV   XDG_RUNTIME_DIR="/tmp" \
-      WINEPREFIX="/game/.wine" \
+      WINEPREFIX="/game/wine/.wine" \
       WINEARCH="win64" \
       WINEDEBUG="-all"
 

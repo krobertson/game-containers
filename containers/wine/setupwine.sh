@@ -1,6 +1,9 @@
 #!/bin/bash
 
+set -e -x
+
 # Initialize wineprefix
+mkdir -p $WINEPREFIX
 wineboot --init --update
 
 # If no winetricks to install, just exit
