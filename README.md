@@ -8,11 +8,19 @@
 
 ### Mission Statement
 
-The goal of this project is to create a suite of base containers for [semantically versioned](https://semver.org/) and [rootless](https://rootlesscontaine.rs/) game servers.
+The goal of this project is to create a suite of base containers for streamlined and [rootless](https://rootlesscontaine.rs/) game servers.
 
 These containers will not contain the games themselves, but will serve as the base environment for them to be installed, updated, and maintained at runtime.
 
 ### Conventions
+
+#### Versioning
+
+Some aspects with versioning are still TBD. I would prefer [semantically versioned](https://semver.org/) containers and having images tied to regular snapshot releases, like a `2026.2.0`. However, also may need multiple versions of some packages, such as multiple versions of Java, and then either need to build a large Java container with many versions, or multiple slimmer ones.
+
+#### Debian Based
+
+All containers are currently based on Debian 13 (trixie). Debian offers wide compatibility, long life per release, well maintained upstream.
 
 #### Rootless
 
@@ -20,4 +28,4 @@ All images expect to run as the `nobody` (65534:65534) user. If a process needs 
 
 #### Game Volume
 
-Images will use a `/game` volume which is expected to store any persisted data. Games that are installed at runtime should use a subdirectory, such as `/game/rust`. Other tooling with some of the images will also persisted to the game volume, such as steamcmd and Wine.
+Images will use a `/game` volume which is expected to store any persisted data. Games should be installed at runtime into this directory. Some containers may persist additional data there, but should be careful with directory naming to avoid collisions, and in many cases should go under dot directories, like `/game/.local`.
