@@ -49,10 +49,8 @@ jobs:
             VENDOR=${{ github.repository_owner }}
             VERSION=${{ inputs.version }}
             REVISION=${{ github.sha }}
-          cache-from: |
-            ${{ format('type=registry,ref=ghcr.io/{0}/build_cache:{1}-{2},mode=max', github.repository_owner, inputs.container, matrix.platform) }}
-          cache-to: |
-            ${{ inputs.release && format('type=registry,ref=ghcr.io/{0}/build_cache:{1}-{2}', github.repository_owner, inputs.container, matrix.platform) || '' }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
           labels: |
             org.opencontainers.image.title=${{ inputs.container }}
             org.opencontainers.image.url=https://ghcr.io/${{ github.repository_owner }}/${{ inputs.container }}
@@ -107,7 +105,7 @@ jobs:
         uses: docker/metadata-action@902fa8ec7d6ecbf8d84d538b9b233a880e428804 # v5.7.0
         with:
           flavor: latest=false
-          images: ghcr.io/${{ github.repository_owner }}/${{ inputs.container }}
+          images: ghcr.io/${{ github.repository_owner }}/${{ github.repository }}/${{ inputs.container }}
           tags: |
             type=match,pattern=^v?(\d+(\.\d+)?(\.\d+)?(\.\d+)?),value=${{ inputs.version }}
             type=match,pattern=^v?(\d+(\.\d+)),value=${{ inputs.version }},enable=${{ steps.semver.outputs.result }}
@@ -120,7 +118,7 @@ jobs:
         with:
           inputs: ${{ join(fromJSON(steps.meta.outputs.json).tags, ',') }}
           images: >-
-            ghcr.io/${{ github.repository_owner }}/${{ github.repository_owner }}/${{ inputs.container }}@${{ needs.build.outputs.amd64 }},
+            ghcr.io/${{ github.repository_owner }}/${{ github.repository }}/${{ inputs.container }}@${{ needs.build.outputs.amd64 }},
           push: true
 
       - name: Export Digest
@@ -133,4 +131,4 @@ jobs:
         uses: sigstore/cosign-installer@d7d6bc7722e3daa8354c50bcb52f4837da5e9b6a # v3.8.1
 
       - name: Sign Image
-        run: cosign sign --yes ghcr.io/${{ github.repository_owner }}/${{ inputs.container }}@${{ steps.digest.outputs.digest }}
+        run: cosign sign --yes ghcr.io/${{ github.repository_owner }}/${{ github.repository }}/${{ inputs.container }}@${{ steps.digest.outputs.digest }}

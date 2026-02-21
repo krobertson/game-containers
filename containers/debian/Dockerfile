@@ -5,9 +5,6 @@ ARG TARGETPLATFORM
 ARG VERSION
 ARG CHANNEL
 
-LABEL org.opencontainers.image.source="https://github.com/krobertson/game-containers"
-LABEL org.opencontainers.image.licenses=MIT
-
 SHELL ["/bin/bash", "-e", "-x", "-u", "-c"]
 
 ENV DEBIAN_FRONTEND=noninteractive
