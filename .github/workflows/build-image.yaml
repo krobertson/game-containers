@@ -12,6 +12,11 @@ on:
         type: string
         description: The version of the container to build
         required: true
+      dockerfile:
+        type: string
+        default: 'Dockerfile'
+        description: The name of the Dockerfile
+        required: false
       release:
         type: boolean
         description: Whether to release the container
@@ -19,7 +24,7 @@ on:
 
 jobs:
   build:
-    name: Build ${{ inputs.container }}:{{inputs.version}} (${{ matrix.platform }})
+    name: Build ${{ inputs.container }}:${{inputs.version}} (${{ matrix.platform }})
     runs-on: ${{ matrix.platform == 'arm64' && 'ubuntu-24.04-arm' || 'ubuntu-latest' }}
     strategy:
       matrix:
@@ -61,7 +66,7 @@ jobs:
             type=docker
             ${{ inputs.release && format('type=image,name=ghcr.io/{0}/{1},push-by-digest=true,name-canonical=true,push=true', github.repository, inputs.container) || '' }}
           context: ./containers/${{ inputs.container }}
-          file: ./containers/${{ inputs.container }}/${{ inputs.file == '' && 'Dockerfile' || inputs.file }}
+          file: ./containers/${{ inputs.container }}/${{ inputs.dockerfile == '' && 'Dockerfile' || inputs.dockerfile }}
           platforms: linux/${{ matrix.platform }}
           provenance: false
 
