@@ -110,7 +110,7 @@ jobs:
             type=match,pattern=^v?(\d+(\.\d+)?(\.\d+)?(\.\d+)?),value=${{ inputs.version }}
             type=match,pattern=^v?(\d+(\.\d+)),value=${{ inputs.version }},enable=${{ steps.semver.outputs.result }}
             type=match,pattern=^v?(\d+),value=${{ inputs.version }},enable=${{ steps.semver.outputs.result }}
-            type=raw,value=${{ inputs.version }},enable=${{ steps.semver.outputs.result != "true" }}
+            type=raw,value=${{ inputs.version }},enable=${{ steps.semver.outputs.result == "true" && "false" || "true" }}
             type=raw,value=rolling
 
       - name: Push Images
