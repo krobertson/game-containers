@@ -22,9 +22,12 @@ RUN   apt-get update; \
       apt-get clean; \
       rm -rf /var/lib/apt/lists/*;
 
+ADD   --chmod=0755 ./run.sh /usr/local/bin
+
 USER        nobody:nogroup
 ENV         HOME=/game
 WORKDIR     /game
 VOLUME      /game
 
 ENTRYPOINT  ["/usr/bin/tini", "-g", "--"]
+CMD         [ "/usr/local/bin/run.sh" ]

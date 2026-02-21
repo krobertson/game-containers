@@ -24,7 +24,7 @@ All containers are currently based on Debian 13 (trixie). Debian offers wide com
 
 #### Rootless
 
-All images expect to run as the `nobody` (65534:65534) user. If a process needs to be privileged user, it can be escalated at runtime using your docker-compose or Kubernetes deployment.
+All images expect to run as the `nobody` (65534:65534) user. If a process needs to be privileged user, it can be escalated at runtime using your docker-compose or Kubernetes deployment. The containers are flexible to run as any user, they don't need to run as `nobody`. If there are sidecar containers that expect to run as `1000`, for instance, you can use that for all the containers here as well, as long as the game volume is mounted with correct permissions.
 
 #### Game Volume
 
