@@ -1,4 +1,4 @@
-FROM  ghcr.io/krobertson/game-containers/debian:rolling
+FROM  ghcr.io/krobertson/game-containers/base:stable
 
 USER  root
 

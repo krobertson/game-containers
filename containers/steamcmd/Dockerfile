@@ -1,6 +1,6 @@
-FROM  ghcr.io/krobertson/game-containers/debian:rolling
+FROM  ghcr.io/krobertson/game-containers/base:stable
 
-USER root
+USER  root
 
 RUN   dpkg --add-architecture i386; \
       apt-get update; \
