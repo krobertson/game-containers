@@ -10,6 +10,5 @@ RUN   dpkg --add-architecture i386; \
       apt-get clean; \
       rm -rf /var/lib/apt/lists/*;
 
-ADD   --chmod=0755 ./steamcmd.sh /usr/local/bin
+ADD   --chmod=0755 ./steamcmd.sh /usr/local/bin/run.sh
 USER  nobody:nogroup
-CMD   ["/usr/local/bin/steamcmd.sh"]
